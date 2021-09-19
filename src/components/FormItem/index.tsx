@@ -11,7 +11,7 @@ interface FormItemProps {
    setter: (value: string) => void
 }
 
-export const FormItem: React.FC<FormItemProps> = ({ label, name, placeholder, value, setter }) => {
+const FormItem: React.FC<FormItemProps> = ({ label, name, placeholder, value, setter }) => {
    const [error, setError] = React.useState(false)
 
    const validation = (value: string, type: FormTypeNames) => {
@@ -48,3 +48,5 @@ export const FormItem: React.FC<FormItemProps> = ({ label, name, placeholder, va
       </div>
    )
 }
+
+export default FormItem
