@@ -1,0 +1,95 @@
+.form {
+   min-width: 360px;
+   padding: 40px 30px;
+   border-radius: 24px;
+   box-shadow: 0px 12px 24px rgba(44, 39, 56, 0.02), 0px 32px 64px rgba(44, 39, 56, 0.04);
+
+ // ============= Header ==============
+   &__header {
+      margin-bottom: 56px;
+      font-size: 16px;
+   }
+
+   &__title {
+      margin-bottom: 8.5px;
+      color: #2C2738;
+      font-size: 34px;
+      font-weight: 700;
+   }
+
+   &__subtitle {
+      color: #2C2738;
+   }
+
+   // ============= Footer ==============
+   .form__checkbox {
+      opacity: 0;
+      height: 0;
+      width: 0;
+   }
+   
+   &__checkbox-label {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      padding-top: 3px;
+      cursor: pointer;
+      font-size: 16px;
+      user-select: none;
+   }
+
+   &__checkbox-label input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+   }
+
+   &__checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 28px;
+      width: 28px;
+      border: 1px solid #DBE2EA;
+      border-radius: 4px;
+   }
+
+   &__checkbox-label input:checked~&__checkmark {
+      border: 2px solid #0880AE;
+   }
+
+   &__checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+   }
+
+   &__checkbox-label input:checked~&__checkmark:after {
+      display: block;
+   }
+
+   &__checkbox-label &__checkmark:after {
+      left: 9px;
+      top: 5px;
+      width: 5px;
+      height: 10px;
+      border: solid #0880AE;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+   }
+
+   &__button {
+      width: 100%;
+      padding: 18px 65px;
+      margin-top: 41px;
+      background: #0880AE;
+      box-shadow: 0px 2px 4px rgba(44, 39, 56, 0.08), 0px 4px 8px rgba(44, 39, 56, 0.08);
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+      color: #EBF4F8;
+      cursor: pointer;
+   }
+}

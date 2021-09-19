@@ -1,37 +1,63 @@
 import React from 'react'
+import { FormItem } from './components/FormItem'
+import "./App.scss"
 
 export const App = () => {
+  const languages = ["Русский", "Английский", "Китайский", "Испанский"]
+  const [language, setLanguage] = React.useState("")
+  
+  const onSetLanguage = (language: string) => {
+    setLanguage(language)
+    setSelecLanguage(false)
+  }
+
+  // Hide a selector after click
+  const [selecLanguage, setSelecLanguage] = React.useState(false)
+  const selectorRef = React.useRef<HTMLDivElement>(null)
+
+  const handleOutsideClick = React.useCallback((e: MouseEvent) => {
+    const path = e.composedPath()
+    if (selectorRef.current !== null && !path.includes(selectorRef.current)) setSelecLanguage(false)
+  }, [])
+
+  React.useEffect(() => {
+    document.body.addEventListener('click', handleOutsideClick);
+    return () => document.body.removeEventListener('click', handleOutsideClick);
+  }, [selecLanguage])
+
   return (
     <div className="container">
       <form className="form">
-        <h2>Регистрация</h2>
-        <p>Уже есть аккаунт? <a href="#">Войти</a></p>
-        <div className="form__group">
-          <label htmlFor="name">Имя</label>
-          <input type="text" name="name" placeholder="Введите Ваше имя" />
+        <div className="form__header">
+          <h2 className="form__title">Регистрация</h2>
+          <p className="form__subtitle">Уже есть аккаунт? <a href="#">Войти</a></p>
         </div>
+        <FormItem label="Имя" placeholder="Введите Ваше имя" name="name" />
+        <FormItem label="Email" placeholder="Введите Ваш email" name="email" />
+        <FormItem label="Телефон" placeholder="Введите номер телефона" name="phone" />
+
         <div className="form__group">
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" placeholder="Введите Ваш email" />
+          <div
+            className={`form__selector-input ${selecLanguage ? "active" : ""}`}
+            onClick={() => { setSelecLanguage(!selecLanguage) }}
+            ref={selectorRef}
+          >
+            <div className="form__input">{language ? language : "Язык"}</div>
+            <i className="form__selector-arrow"></i>
+          </div>
+          <div className={`form__selector ${selecLanguage ? "active" : ""}`}>
+            {languages.map((item, index) => <p onClick={() => onSetLanguage(item)} key={index}>{item}</p>)}
+          </div>
         </div>
-        <div className="form__group">
-          <label htmlFor="phone">Номер телефона</label>
-          <input type="text" name="phone" placeholder="Введите номер телефона" />
-        </div>
-        <div className="form__group">
-          <label htmlFor="name">Язык</label>
-          <select name="language">
-            <option value="russian">Русский</option>
-            <option value="english">Английский</option>
-            <option value="chinese">Китайский</option>
-            <option value="spanish">Испанский</option>
-          </select>
-        </div>
+
         <div className="form__check">
-          <input type="checkbox" id="checkbox" />
-          <label htmlFor="checkbox">Принимаю <a href="#">условия</a> использования</label>
+          <label className="form__checkbox-label">
+            Принимаю <a href="#">условия</a> использования
+            <input type="checkbox" />
+            <span className="form__checkmark"></span>
+          </label>
         </div>
-        <button>Зарегистрироваться</button>
+        <button className="form__button">Зарегистрироваться</button>
       </form>
     </div>
   )
