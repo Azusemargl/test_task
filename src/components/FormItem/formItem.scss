@@ -40,7 +40,7 @@
    &__selector {
       display: none;
       width: 100%;
-      padding: 12px 4px;
+      padding: 12px 0;
       position: absolute;
       top: 60px;
       left: 0;
@@ -50,9 +50,13 @@
       z-index: 10;
 
       p {
-         padding: 12px 15px;
+         padding: 12px 17px;
          color: #756F86;
          cursor: pointer;
+
+         &:hover {
+            background-color: #EBF4F8;
+         }
       }
 
       &-input {

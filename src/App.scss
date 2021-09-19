@@ -91,5 +91,11 @@
       font-size: 16px;
       color: #EBF4F8;
       cursor: pointer;
+
+      &:disabled {
+         background-color: #DBE2EA;
+         color: #B1B5BF;
+         cursor: default;
+      }
    }
 }
